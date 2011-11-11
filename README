@@ -1,0 +1,2 @@
+cp sites.example.yml sites.yml
+ruby import.rb
