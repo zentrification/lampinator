@@ -1,0 +1,44 @@
+# sample site to create/import with comments
+example_site:
+  apache:
+    # primary domain
+    # www.example.com is automatically created
+    domain: example.com
+    # other domains that point to this configuration
+    aliases:
+      - example.net
+      - example.org
+      - example-mirror.org
+  # database configuration
+  # if name and user are omitted, they will be inferred from site_name
+  database:
+    name: example_db_name
+    user: example_user
+    password: example_password
+  # database and files to import
+  # one or both can be omitted
+  files:
+    # filename of sql database dump to import 
+    # eg, from a: mysqldump db_name -h host -u user -p > db_name.sql
+    db_dump: filename.sql
+    # archive of apache docroot to import
+    # eg, from a: zip -r mysite_docroot.zip mysite_docroot
+    docroot_zip: files.zip
+
+# without comments
+example_site:
+  apache:
+    domain: example.com
+    aliases:
+      - example.net
+      - example.org
+      - example-mirror.org
+    htaccess: no
+  database:
+    name: example_db_name
+    user: example_user
+    password: example_password
+  files:
+    db_dump: filename.sql
+    docroot_zip: files.zip
+

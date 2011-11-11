@@ -1,0 +1,8 @@
+apache:
+  docroot: /var/www
+  vhosts: /etc/apache2/sites-available
+
+database:
+  host: localhost
+  user: root
+  pass:
