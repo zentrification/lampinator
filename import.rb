@@ -1,3 +1,4 @@
+require 'logger'
 require 'tilt'
 require 'yaml'
 
@@ -8,6 +9,24 @@ class String
     self.reverse[0].eql?('/') ? self : self + '/'
   end
 end
+
+# log to logfile and stdout
+class MultiIO
+  def initialize(*targets)
+     @targets = targets
+  end
+
+  def write(*args)
+    @targets.each {|t| t.write(*args)}
+  end
+
+  def close
+    @targets.each(&:close)
+  end
+end
+
+log_file = File.open("log.txt", "a")
+$log = Logger.new MultiIO.new(STDOUT, log_file)
 
 # config
 # ------------------------------
@@ -26,14 +45,14 @@ sites.each_key do |key|
   filename = apache_vhosts.to_s + sites[key]['apache']['domain'].to_s
   domain_check = `egrep #{sites[key]['apache']['domain']} /etc/apache2/sites-available/*`
   unless domain_check.empty?
-    puts 'Error: domain already in use'
-    puts domain_check
+    $log.error 'Error: domain already in use'
+    $log.error domain_check
     exit
   end
 
   if FileTest.exists? filename
-    puts 'Error: apache configuration file already exists'
-    puts filename
+    $log.error 'Error: apache configuration file already exists'
+    $log.error filename
     exit
   end
 
@@ -47,7 +66,8 @@ sites.each_key do |key|
   vhost_file = File.open(filename, 'w')
   vhost_file.puts output
   vhost_file.close
-  puts 'apache configuration file written'
+  $log.info 'Apache configuration file written'
+  $log.info filename
 
   # enable apache configuration file and restart apache
   system("a2ensite #{sites[key]['apache']['domain']}")
