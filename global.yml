@@ -1,8 +1,8 @@
 apache:
-  docroot: /var/www
-  vhosts: /etc/apache2/sites-available
+  docroot: /tmp/apache/var/www
+  vhosts: /tmp/apache/etc/apache2/sites-available
 
-database:
+mysql:
   host: localhost
   user: root
   pass:
