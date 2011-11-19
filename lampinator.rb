@@ -2,6 +2,7 @@ require 'logger'
 require 'tilt'
 require 'yaml'
 require File.dirname(__FILE__) + '/lib/apache.rb'
+require File.dirname(__FILE__) + '/lib/mysql.rb'
 require File.dirname(__FILE__) + '/lib/util.rb'
 
 # logging
@@ -27,6 +28,7 @@ apache_vhosts = global['apache']['vhosts'].add_trailing_slash
 # ------------------------------
 sites.each_key do |key|
   Apache.configure(docroot, apache_vhosts, sites[key]['apache']) if sites[key]['apache']
+  Mysql.configure('localhost', 'root', '', sites[key]['mysql']) if sites[key]['mysql']
 end
 
 
@@ -37,8 +39,8 @@ end
 #       - example.net
 #       - example.org
 #       - example-mirror.org
-#   database:
-#     name: example_db_name
+#   mysql:
+#     database: example_db_name
 #     user: example_user
 #     password: example_password
 #   files:
