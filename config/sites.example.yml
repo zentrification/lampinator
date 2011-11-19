@@ -1,9 +1,25 @@
+example_site:
+  apache:
+    primary: example.com
+    aliases:
+      - example.net
+      - example.org
+      - example-mirror.org
+    htaccess: no
+  mysql:
+    database: example_db_name
+    user: example_user
+    password: example_password
+  files:
+    db_dump: filename.sql
+    docroot_zip: files.zip
+
 # sample site to create/import with comments
 example_site:
   apache:
     # primary domain
     # www.example.com is automatically created
-    domain: example.com
+    primary: example.com
     # other domains that point to this configuration
     aliases:
       - example.net
@@ -12,7 +28,7 @@ example_site:
   # database configuration
   # if name and user are omitted, they will be inferred from site_name
   database:
-    name: example_db_name
+    database: example_db_name
     user: example_user
     password: example_password
   # database and files to import
@@ -24,21 +40,3 @@ example_site:
     # archive of apache docroot to import
     # eg, from a: zip -r mysite_docroot.zip mysite_docroot
     docroot_zip: files.zip
-
-# without comments
-example_site:
-  apache:
-    domain: example.com
-    aliases:
-      - example.net
-      - example.org
-      - example-mirror.org
-    htaccess: no
-  database:
-    name: example_db_name
-    user: example_user
-    password: example_password
-  files:
-    db_dump: filename.sql
-    docroot_zip: files.zip
-
