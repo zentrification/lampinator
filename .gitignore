@@ -1,2 +1,3 @@
-sites.yml
+config/global.yml
+config/sites.yml
 log.txt

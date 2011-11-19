@@ -17,8 +17,8 @@ end
 
 # config
 # ------------------------------
-global = YAML.load_file 'global.yml'
-sites = YAML.load_file 'sites.yml'
+global = YAML.load_file 'config/global.yml'
+sites = YAML.load_file 'config/sites.yml'
 
 docroot = global['apache']['docroot'].add_trailing_slash
 apache_vhosts = global['apache']['vhosts'].add_trailing_slash
