@@ -1,6 +1,6 @@
 apache:
-  docroot: /tmp/apache/var/www
-  vhosts: /tmp/apache/etc/apache2/sites-available
+  docroot: /var/www
+  vhosts: /etc/apache2/sites-available
 
 mysql:
   host: localhost
